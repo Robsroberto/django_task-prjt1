@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks_app',
-    # 'django.contrib.auth',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+LOGIN_URL = '/login/'  # URL where users will be redirected to log in
+LOGIN_REDIRECT_URL = '/tasks/'  # URL where users will be redirected after successful login
 
 
 # Internationalization
