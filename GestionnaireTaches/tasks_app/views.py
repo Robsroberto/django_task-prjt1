@@ -4,7 +4,9 @@ from .models import Task
 from django.views import View
 from django.views.generic import ListView, CreateView
 from .forms import TaskForm
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views.generic import UpdateView, DeleteView
@@ -12,12 +14,12 @@ from django.views.generic import UpdateView, DeleteView
 # Create your views here.
 
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin,ListView):
     model = Task
     template_name = 'tasks_app/task_list.html'
     context_object_name = 'tasks'
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin,CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks_app/task_form.html'
