@@ -10,10 +10,11 @@
                 <span class="badge {% if task.completed %}badge-success{% else %}badge-secondary{% endif %}">
                     {% if task.completed %}Terminée{% else %}Non Terminée{% endif %}
                 </span>
+                <a class="btn btn-info btn-sm ml-2" href="{% url 'task_update' task.pk %}">Modifier</a>
+                <a class="btn btn-danger btn-sm ml-2" href="{% url 'task_delete' task.pk %}">Supprimer</a>
             </li>
         {% endfor %}
     </ul>
     <a class="btn btn-primary mt-3" href="{% url 'task_create' %}">Ajouter une Tâche</a>
 </div>
 {% endblock %}
-

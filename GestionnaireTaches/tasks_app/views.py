@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Task
 from django.views import View
 from django.views.generic import ListView, CreateView
@@ -6,7 +7,7 @@ from .forms import TaskForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-
+from django.views.generic import UpdateView, DeleteView
 
 # Create your views here.
 
@@ -23,6 +24,22 @@ class TaskCreateView(CreateView):
     success_url = '/tasks/'
 
 
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskForm  # Utilisez votre propre formulaire
+    template_name = 'tasks_app/task_update.html'  # Créez ce template
+
+    def get_success_url(self):
+        return reverse('task_list')  # Rediriger après la modification vers la liste des tâches
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'tasks_app/task_confirm_delete.html'  # Créez ce template
+
+    def get_success_url(self):
+        return reverse('task_list')  # Rediriger après la suppression vers la liste des tâches
 
 # class TaskListView(View):
 #     def get(self, request):

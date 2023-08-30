@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Modifier la Tâche</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-3">Enregistrer les Modifications</button>
+        <a class="btn btn-secondary mt-3 ml-2" href="{% url 'task_list' %}">Annuler</a>
+    </form>
+</div>
+{% endblock %}
