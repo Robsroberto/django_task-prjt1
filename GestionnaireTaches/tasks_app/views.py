@@ -10,7 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.views.generic import UpdateView, DeleteView
-
+from django.contrib.auth.views import LogoutView
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -71,3 +72,9 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'tasks_app/signup.html', {'form': form})
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('tasks_app/task_list.html')  # Remplacez 'your_login_page' par le nom de votre page de connexion
+
+# Utilisez CustomLogoutView dans urls.py comme indiqué ci-dessus
