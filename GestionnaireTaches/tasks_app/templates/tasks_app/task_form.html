@@ -12,7 +12,6 @@
         <form method="post" class="form">
             {% csrf_token %}
 
-            <!-- Champ pour le nom d'utilisateur -->
             <div class="mb-3">
               <label for="{{ form.title.id_for_label }}" class="form-label">Titre</label>
               {{ form.title }}
@@ -23,10 +22,6 @@
               <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
               {{ form.description }}
             </div>
-        <!-- <div class="custom-control custom-switch mb-3">
-              <label for="{{ form.completed.id_for_label }}" class="form-label">Complété</label>
-              {{ form.completed }}
-            </div> -->
             <div class="form-check form-switch mb-3">
                 <input type="checkbox" class="form-check-input " role="switch" id="flexSwitchCheckDefault" name="completed" disabled>
                 <label class="custom-control-label" for="customSwitch">Complété</label>
@@ -48,15 +43,7 @@
             </div>
           {% endif %}
         </div>
-        
-            
-            
-            
-            
-            
-        <!-- {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Enregistrer</button>
-    </form> -->
+ 
 </div>
 </div>
 </div>

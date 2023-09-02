@@ -1,11 +1,3 @@
-<!--
-
-<ul>
-    <li><a href="{% url 'login' %}">Login</a></li>
-    <li><a href="{% url 'logout' %}">Logout</a></li>
-    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-  </ul>
- -->
  {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +50,59 @@
             <a href="https://www.empireduweb.com">Empire du Web</a>
         </p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Sélectionnez tous les liens de suppression avec la classe "delete-task"
+            const deleteLinks = document.querySelectorAll(".delete-task");
+        
+            // Attachez un gestionnaire d'événements à chaque lien de suppression
+            deleteLinks.forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault(); // Empêchez le lien de suivre le lien href
+        
+                    const taskId = link.getAttribute("data-task-id");
+        
+                    if (confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) {
+                        // Effectuez une requête AJAX vers la vue TaskDeleteView
+                        fetch(`/tasks/${taskId}/delete/`, {
+                            method: "DELETE",
+                            headers: {
+                                "X-CSRFToken": getCookie("csrftoken"), // Assurez-vous d'obtenir le jeton CSRF correctement
+                                "Content-Type": "application/json",
+                            },
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data.success) {
+                                // Actualisez la page pour refléter la suppression
+                                location.reload();
+                            } else {
+                                alert("La suppression a échoué.");
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        
+        // Fonction pour obtenir le jeton CSRF depuis les cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === name + "=") {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        </script>
+        
+        
 
     <!-- Désactive l'affichage automatique des messages d'erreur -->
     {% block messages %}{% endblock %}

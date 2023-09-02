@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
 # from GestionnaireTaches.tasks_app.forms import CustomAuthenticationForm
-from tasks_app.views import CustomLoginView  # Assurez-vous d'importer la vue personnalisée depuis le bon emplacement
+from tasks_app.views import CustomLoginView  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,9 +27,5 @@ urlpatterns = [
     # path('login/', auth_views.LoginView.as_view(), name='login'),
     # path('login/', LoginView.as_view(authentication_form=CustomAuthenticationForm), name='login'),
     path('login/', CustomLoginView.as_view(), name='login'), 
-
-
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    # path('signup/', signup_view, name='signup'),  # Créer votre propre vue pour l'inscription
-    # ...
 ]

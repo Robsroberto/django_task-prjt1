@@ -12,7 +12,6 @@ class TaskForm(forms.ModelForm):
                 'description': forms.Textarea(attrs={'class': 'form-control'}),
                 'completed': forms.CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox', 'role':'switch' ,'id': 'flexSwitchCheckDefault'}),
 
-                # Ajoutez d'autres champs et leurs styles ici
             }
 
 
@@ -30,10 +29,9 @@ class CustomAuthenticationForm(AuthenticationForm):
     )
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
-        model = User  # Assurez-vous d'importer User depuis django.contrib.auth.models
-        fields = ['username', 'password1', 'password2']  # Les champs que vous voulez inclure dans le formulaire
+        model = User  
+        fields = ['username', 'password1', 'password2']  
 
-    # Personnalisez les widgets et les attributs des champs comme vous le souhaitez
     username = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
