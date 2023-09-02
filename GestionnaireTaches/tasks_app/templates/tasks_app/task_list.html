@@ -8,8 +8,10 @@
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
-                <th scope="col">Date</th>
-                <th scope="col">Complété</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Date de Fin</th>
+                <th scope="col">État</th>
+                <th scope="col">Utilisateur</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -19,6 +21,7 @@
                     <td>{{ task.title }}</td>
                     <td>{{ task.description }}</td>
                     <td>{{ task.created_at }}</td>
+                    <td>{{ task.completed_date }}</td>
                     <td>
                         {% if task.completed %}
                             <span class="badge rounded-pill text-bg-success">Terminée</span>
@@ -26,6 +29,7 @@
                             <span class="badge rounded-pill text-bg-danger">Non Terminée</span>
                         {% endif %}
                     </td>
+                    <td>{{ task.created_by.username }}</td>
                     <td>
                         <a href="{% url 'task_update' task.id %}">
                             <i class="fas fa-pencil-alt text-primary"></i>
