@@ -1,18 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Gestionnaire de Tâches</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
-    {% block content %}{% endblock %}
-    <!-- base.html -->
+<!--
 
 <ul>
     <li><a href="{% url 'login' %}">Login</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
     <li><a href="{% url 'signup' %}">Sign Up</a></li>
   </ul>
-  
+ -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gestionnaire de Tâches</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'task_list' %}">Gestionnaire de Tâches</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'task_list' %}">Liste des Tâches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'task_create' %}">Ajouter une Tâche</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="text-center py-3">
+        <p>Tous droits réservés &copy; 2023 par 
+            <a href="https://www.empireduweb.com">Empire du Web</a>
+        </p>
+    </footer>
+
+    <!-- Désactive l'affichage automatique des messages d'erreur -->
+    {% block messages %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

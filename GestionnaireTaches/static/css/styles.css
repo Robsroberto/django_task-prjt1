@@ -1,0 +1,22 @@
+CSS personnalisé */
+/* .badge-custom-success {
+    background-color: #28a745; 
+    color: white;
+}
+
+.badge-custom-danger {
+    background-color: #dc3545; 
+    color: white;
+}*/
+
+
+/* Style du bouton glissant (toggle switch) */
+.custom-switch .custom-control-label::before {
+    width: 40px; /* Largeur du bouton */
+    background-color: #2196F3;  !important;/* Couleur de fond quand activé */
+}
+
+/* Style du label quand le bouton est activé */
+.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #28a745; !important;   /* Couleur de fond quand activé */
+}

@@ -1,17 +1,19 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
 from .models import Task
+from django.shortcuts import render, redirect
+from django.urls import reverse,reverse_lazy
+
+from django.views.generic import UpdateView, DeleteView
 from django.views import View
 from django.views.generic import ListView, CreateView
-from .forms import TaskForm
-# from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .forms import TaskForm,CustomAuthenticationForm
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.views.generic import UpdateView, DeleteView
-from django.contrib.auth.views import LogoutView
-from django.urls import reverse_lazy
+from django.contrib.auth.views import LogoutView,LoginView
+# from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -26,10 +28,7 @@ class TaskCreateView(LoginRequiredMixin,CreateView):
     template_name = 'tasks_app/task_form.html'
     success_url = '/tasks/'
 
-
-
-
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm  # Utilisez votre propre formulaire
     template_name = 'tasks_app/task_update.html'  # Créez ce template
@@ -37,7 +36,7 @@ class TaskUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('task_list')  # Rediriger après la modification vers la liste des tâches
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks_app/task_confirm_delete.html'  # Créez ce template
 
@@ -77,4 +76,8 @@ def signup_view(request):
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('tasks_app/task_list.html')  # Remplacez 'your_login_page' par le nom de votre page de connexion
 
-# Utilisez CustomLogoutView dans urls.py comme indiqué ci-dessus
+
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
+

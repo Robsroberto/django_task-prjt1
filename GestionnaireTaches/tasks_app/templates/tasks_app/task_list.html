@@ -3,6 +3,49 @@
 {% block content %}
 <div class="container mt-5">
     <h1>Liste des Tâches</h1>
+    <table class="table table-info table-striped table-hover border">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Complété</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.created_at }}</td>
+                    <td>
+                        {% if task.completed %}
+                            <span class="badge rounded-pill text-bg-success">Terminée</span>
+                        {% else %}
+                            <span class="badge rounded-pill text-bg-danger">Non Terminée</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'task_update' task.id %}">
+                            <i class="fas fa-pencil-alt text-primary"></i>
+                        </a>
+                    
+                        <a href="{% url 'task_delete' task.id %}">
+                            <i class="fas fa-trash text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+{% endblock %}
+
+<!-- <div class="container mt-5">
+    <h1>Liste des Tâches</h1>
     <ul class="list-group">
         {% for task in tasks %}
             <li class="list-group-item">
@@ -16,5 +59,4 @@
         {% endfor %}
     </ul>
     <a class="btn btn-primary mt-3" href="{% url 'task_create' %}">Ajouter une Tâche</a>
-</div>
-{% endblock %}
+</div> -->
