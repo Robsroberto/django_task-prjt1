@@ -2,6 +2,42 @@
 
 {% block content %}
 <div class="container mt-5">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+<form method="GET">
+    <div class="form-group row justify-content-end">
+        <h4 class="col-sm-1">Filtre</h4>
+        <label for="status" class="col-sm-1 col-form-label">État :</label>
+        <div class="col-sm-2">
+            <select name="status" class="form-control" id="status">
+                <option value="">Tous</option>
+                <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Terminées</option>
+                <option value="not_completed" {% if request.GET.status == 'not_completed' %}selected{% endif %}>Non terminées</option>
+            </select>
+        </div>
+  
+        <!-- <label for="sort_by" class="col-sm-1 col-form-label">Trier par :</label> -->
+        <label for="due_date" class="col-sm-1 col-form-label">Date :</label>
+<div class="col-sm-2">
+    <input type="date" name="due_date" class="form-control" id="due_date" value="{{ request.GET.due_date }}">
+</div>
+        <!-- <div class="col-sm-2">
+            <select name="sort_by" class="form-control" id="sort_by">
+                <option value="created_date" {% if request.GET.sort_by == 'created_date' %}selected{% endif %}>Date de création</option>
+            </select>
+            <input type="date" name="created_date" class="form-control datepicker" id="created_date" placeholder="Date de creation">
+
+        </div> -->
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">Appliquer le filtre</button>
+        </div>
+    </div>
+</form>
     <h1>Liste des Tâches</h1>
     <table class="table table-info table-striped table-hover border">
         <thead>
@@ -46,6 +82,44 @@
     </table>
     
 </div>
+<nav aria-label="Page navigation example">
+    <span class="current-page">{{ page}}</span>
+    <ul class="pagination justify-content-center">
+      {% if page.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a>
+        </li>
+      {% endif %}
+      
+      <li class="page-item active">
+        <a class="page-link" href="?page={{ page.number }}">{{ page.number }}</a>
+      </li>
+      
+      {% if page.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page.paginator.num_pages }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  
+<script>
+    $(document).ready(function () {
+        // Initialisation du sélecteur de date pour tous les champs avec la classe 'datepicker'
+        $('.datepicker').datepicker();
+    });
+</script>
+
 
     
 {% endblock %}

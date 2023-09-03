@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks_app',
+    'django.core.paginator',
+
 ]
 
 MIDDLEWARE = [
@@ -106,8 +108,13 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_URL = '/login/'  # URL where users will be redirected to log in
-LOGIN_REDIRECT_URL = '/tasks/'  # URL where users will be redirected after successful login
+LOGIN_URL = '/login/'  
+LOGIN_REDIRECT_URL = '/tasks/'  
+
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_SECURE = False  
 
 
 # Internationalization
@@ -130,5 +137,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+PAGINATION_DEFAULT_PAGINATION = 5  # Par exemple, vous pouvez définir le nombre de résultats par page ici
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
