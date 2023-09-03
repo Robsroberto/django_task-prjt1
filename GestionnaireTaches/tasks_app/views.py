@@ -36,7 +36,7 @@ class TaskListView(LoginRequiredMixin,ListView):
     model = Task
     template_name = 'tasks_app/task_list.html'
     context_object_name = 'tasks'
-    paginate_by = 5  
+    paginate_by = 10  
 
     def get_queryset(self):
         queryset = Task.objects.filter(created_by=self.request.user)
@@ -61,9 +61,9 @@ class TaskListView(LoginRequiredMixin,ListView):
         # Trier par date de création par défaut
         sort_by = self.request.GET.get('sort_by', 'created_at')
         if sort_by == 'created_at':
-            queryset = queryset.order_by('-created_at')  # Utilisez '-' pour trier par ordre décroissant
+            queryset = queryset.order_by('-created_at')  
 
-        # Utilisez Paginator pour paginer les résultats
+      
         # paginator = Paginator(queryset, self.paginate_by)
         # page = self.request.GET.get('page')
 

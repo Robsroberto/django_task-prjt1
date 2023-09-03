@@ -138,6 +138,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-PAGINATION_DEFAULT_PAGINATION = 5  # Par exemple, vous pouvez définir le nombre de résultats par page ici
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
