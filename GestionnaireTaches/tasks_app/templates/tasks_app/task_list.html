@@ -16,8 +16,8 @@
         <div class="col-sm-2">
             <select name="status" class="form-control" id="status">
                 <option value="">Tous</option>
-                <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Terminées</option>
-                <option value="not_completed" {% if request.GET.status == 'not_completed' %}selected{% endif %}>Non terminées</option>
+                <option class="text-bg-success" value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Terminées</option>
+                <option class="text-bg-danger" value="not_completed" {% if request.GET.status == 'not_completed' %}selected{% endif %}>Non terminées</option>
             </select>
         </div>
   
@@ -57,7 +57,13 @@
                     <td>{{ task.title }}</td>
                     <td>{{ task.description }}</td>
                     <td>{{ task.created_at }}</td>
-                    <td>{{ task.completed_date }}</td>
+                    <td>
+                    {% if task.completed_date == None %}
+                       {{ "En Cour ..."}}
+                    {% else %}
+                       {{ task.completed_date}}
+                    {% endif %}
+                    </td>
                     <td>
                         {% if task.completed %}
                             <span class="badge rounded-pill text-bg-success">Terminée</span>
