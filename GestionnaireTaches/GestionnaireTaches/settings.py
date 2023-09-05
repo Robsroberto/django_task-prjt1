@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks_app',
-    'django.core.paginator',
+    # 'django.core.paginator',
+    'taggit',
 
 ]
 
@@ -116,6 +117,7 @@ LOGIN_REDIRECT_URL = '/tasks/'
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_COOKIE_SECURE = False  
 
+TAGGIT_TAGS = 'tasks_app.models.CustomTag'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -124,6 +126,7 @@ SESSION_COOKIE_SECURE = False
 LANGUAGE_CODE = 'fr-FR'
 
 TIME_ZONE = 'UTC'
+USE_L10N = True
 
 USE_I18N = True
 

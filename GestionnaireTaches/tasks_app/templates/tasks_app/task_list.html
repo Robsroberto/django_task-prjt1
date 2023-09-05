@@ -11,6 +11,10 @@
 {% endif %}
 <form method="GET">
     <div class="form-group row justify-content-end">
+        
+    <div class="col-sm-2     text-center mb-3">
+        <a href="{% url 'create_category' %}" class="btn btn-info">Ajouter une Catégorie</a>
+    </div>
         <h4 class="col-sm-1">Filtre</h4>
         <label for="status" class="col-sm-1 col-form-label">État :</label>
         <div class="col-sm-2">
@@ -38,13 +42,21 @@
         </div>
     </div>
 </form>
+<form method="post" action="{% url 'export_tasks' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Exporter au format JSON</button>
+    <button type="submit" class="btn btn-success" name="export_csv" value="1">Exporter au format CSV</button>
+</form>
     <h1>Liste des Tâches</h1>
     <table class="table table-info table-striped table-hover border">
         <thead>
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Tag</th>
                 <th scope="col">Date de création</th>
+                <th scope="col">Date d'échéance</th>
                 <th scope="col">Date de Fin</th>
                 <th scope="col">État</th>
                 <th scope="col">Utilisateur</th>
@@ -56,7 +68,24 @@
                 <tr>
                     <td>{{ task.title }}</td>
                     <td>{{ task.description }}</td>
+                    <td>
+                        {% for category in task.categories.all %}
+                            {{ category.name }}
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tag in task.tags.all %}
+                            <span class="badge rounded-pill text-bg-warning" style=" color: white;">
+                                {{ tag.name }}
+                            </span>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    
+                    
                     <td>{{ task.created_at }}</td>
+                    <td>{{ task.due_date }}</td>
                     <td>
                     {% if task.completed_date == None %}
                        {{ "En Cour ..."}}
@@ -74,10 +103,10 @@
                     <td>{{ task.created_by.username }}</td>
                     <td>
                         <a href="{% url 'task_update' task.id %}">
-                            <i class="fas fa-pencil-alt text-primary"></i>
+                            <i class="btn btn-sm btn-warning fas fa-pencil-alt"></i>
                         </a>
                         <a href="#" class="delete-task" data-task-id="{{ task.id }}">
-                            <i class="fas fa-trash text-danger"></i>
+                            <i class=" btn btn-sm btn-danger fas fa-trash "></i>
                         </a>
                         
                         
@@ -124,7 +153,5 @@
         $('.datepicker').datepicker();
     });
 </script>
-
-
     
 {% endblock %}

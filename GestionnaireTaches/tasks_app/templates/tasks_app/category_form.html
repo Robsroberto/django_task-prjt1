@@ -1,0 +1,56 @@
+<!-- templates/tasks_app/category_form.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+            <div class="card text-bg-info">
+                <div class="card-header text-center">
+                    <h1>Ajouter une Catégorie</h1>
+                </div>
+                <!-- Formulaire de création de catégorie -->
+                <div class="card-body" id="create-category-form">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ category_form.as_p }}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <h2>Liste des Catégories</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom de la Catégorie</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.name }}</td>
+                                <td>
+                                    <a href="{% url 'update_category' category.id %}" class="btn btn-sm btn-warning update-category-button" >
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a href="{% url 'delete_category' category.id %}" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

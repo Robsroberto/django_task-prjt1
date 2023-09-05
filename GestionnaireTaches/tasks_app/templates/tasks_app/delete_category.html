@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Confirmer la suppression de la catégorie "{{ category.name }}" ?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmer</button>
+        <a href="{% url 'create_category' %}" class="btn btn-info">Annuler</a>
+    </form>
+
+{% endblock %}

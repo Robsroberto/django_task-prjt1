@@ -1,0 +1,25 @@
+<!-- templates/tasks_app/update_category_form.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-4">
+            <div class="card text-bg-info">
+                <div class="card-header text-center">
+                    <h1>Modifier une Catégorie</h1>
+                </div>
+                <div class="card-body" id="update-category-form">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ update_category_form.as_p }}
+                        <button type="submit" class="btn btn-warning">Modifier</button>
+                        <a href="#" class="btn btn-secondary cancel-update-button">Annuler</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

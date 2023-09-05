@@ -23,6 +23,20 @@
               <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
               {{ form.description }}
             </div>
+            <div class="mb-3">
+              <label for="{{ form.due_date.id_for_label }}" class="form-label">Date d'échéance</label>
+              {{ form.due_date }}
+          </div>
+          
+            <div class="mb-3">
+              <label for="{{ form.categories.id_for_label }}" class="form-label">Catégorie</label>
+              {{ form.categories }}
+          </div>
+          <div class="mb-3">
+            <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+            {{ form.tags }}
+        </div>
+        
         <div class=class="form-check form-switch mb-3">
               <label for="{{ form.completed.id_for_label }}" class="form-label" for="flexSwitchCheckDefault">Terminé</label>
               {{ form.completed }}
@@ -31,7 +45,7 @@
                 <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheckDefault" name="completed">
                 <label class="custom-control-label" for="customSwitch">Complété</label>
             </div> -->
-
+                      
             <button type="submit" class="btn btn-primary">Enregistrer</button>
           </form>
 

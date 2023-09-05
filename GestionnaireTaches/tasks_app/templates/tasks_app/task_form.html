@@ -22,6 +22,20 @@
               <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
               {{ form.description }}
             </div>
+            <div class="form-group">
+              <label for="{{ form.due_date.id_for_label }}">Date d'échéance :</label>
+              <input type="date" class="form-control" id="{{ form.due_date.id_for_label }}" name="{{ form.due_date.name }}" value="{{ form.due_date.value }}">
+          </div>
+            
+            <div class="mb-3">
+              <label for="{{ form.categories.id_for_label }}" class="form-label">Catégorie</label>
+              {{ form.categories }}
+          </div>
+          <div class="mb-3">
+            <label for="id_tag_name" class="form-label">Nom du Tag</label>
+            <input type="text" class="form-control" id="id_tag_name" name="tags" data-role="tagsinput">
+        </div>
+      
             <div class="form-check form-switch mb-3">
                 <input type="checkbox" class="form-check-input " role="switch" id="flexSwitchCheckDefault" name="completed" disabled>
                 <label class="custom-control-label" for="customSwitch">Complété</label>

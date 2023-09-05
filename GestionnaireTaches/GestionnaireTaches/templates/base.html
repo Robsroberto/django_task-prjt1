@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <a class="navbar-brand" href="{% url 'task_list' %}">Gestionnaire de Tâches</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,6 @@
             </div>
         </nav>
     </header>
-
     <main>
         
         {% block content %}{% endblock %}
@@ -63,26 +62,6 @@
             <a href="https://www.empireduweb.com">Empire du Web</a>
         </p>
     </footer>
-    <script>
-        // Fonction pour masquer le message de bienvenue après un délai
-        function hideWelcomeMessage() {
-            const welcomeMessage = document.getElementById('welcome-message');
-            if (welcomeMessage) {
-                setTimeout(function () {
-                    welcomeMessage.style.display = 'none';
-                }, 5000); 
-            }
-        }
-    
-        // Appeler la fonction pour masquer le message de bienvenue
-        hideWelcomeMessage();
-    </script>
-    
-    
-    
-    
-    
-    
     
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -135,9 +114,6 @@
         return cookieValue;
     }
 </script>
-
-        
-        
 
     <!-- Désactive l'affichage automatique des messages d'erreur -->
     {% block messages %}{% endblock %}
